@@ -1,6 +1,8 @@
 # Tool for Scanning Browser Extensions
 
-This CLI tool is designed to process Excel files, focusing on Google Chrome and Mozilla Firefox Extension IDs. It fetches permissions and other details from the Crxcavator API and writes the processed data to Excel files.
+This tool is designed to process Excel files, focusing on Google Chrome and Mozilla Firefox browsers. It fetches permissions and other details of browser extensions from the Crxcavator API using etension IDs and writes the processed data to Excel files.
+
+This tool can be used to scan browser extensions used througout an organization/team to find vulnerable or overly permissive extensions, the generated information can later be used to reduce the attack surface by deleting the insecure extensions or in any way intended.
 
 ## Credits
 
@@ -23,7 +25,9 @@ pip install -r requirements.txt
 
 2. **Run the Scanner**:
    - To scan a file, use the following command, replacing `<file_name.xlsx>` with the path to your Excel file:
+~~~ 
 python3 scanner.py <file_name.xlsx>
+~~~
 
 - For testing purposes, you can use the provided test file:
 
