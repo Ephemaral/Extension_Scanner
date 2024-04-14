@@ -5,4 +5,7 @@ This CLI tool is designed to process Excel files, specifically focusing on Googl
 ## Installation
 
 1. Clone the repository:
-2. Clone the repository using '''git clone '''
+   Clone the repository using '''git clone https://github.com/Ephemaral/Extension_Scanner/tree/master.git'''
+
+2. Arguments needed for this are '''python3 scanner.py <file_name.xlsx>'''
+   There is a test file in the repo, if you want to test the scanner just run '''python3 scanner.py test.xlsx'''
