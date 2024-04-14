@@ -5,3 +5,4 @@ This CLI tool is designed to process Excel files, specifically focusing on Googl
 ## Installation
 
 1. Clone the repository:
+2. Clone the repository using '''git clone '''
