@@ -216,11 +216,11 @@ def lambda_handler(file_path):
         
 
     failed_df = pd.DataFrame(failed_extension_ids, columns=['Failed Extension ID'])
-    failed_excel_file = '/Users/temp/extensions/failed_extensions_safety_status_output.xlsx'
+    failed_excel_file = 'failed_extensions_safety_status_output.xlsx'
     failed_df.to_excel(failed_excel_file, index=False)
 
     new_df = pd.DataFrame(data)
-    new_excel_file = '/Users/temp/extensions/extensions_safety_status_output.xlsx'
+    new_excel_file = 'extensions_safety_status_output.xlsx'
     new_df.to_excel(new_excel_file, index=False)
 
     return {'statusCode': 200, 'body': json.dumps('Processed file saved locally')}
