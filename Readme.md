@@ -59,6 +59,14 @@ python3 scanner.py test.xlsx
 - **Contributions**: Feel free to contribute to this project by submitting pull requests or reporting issues.
 - **For Files With Additional Data**: If your excel file contains extra data try rewriting the file_prep() function in a way that column_name matches with the one in your excel file.
 
+## Roadmap Items
+
+- **Code Optimisation**
+- **Dockerization**
+- **Automate Mitigation(Removing/Whitelisting Extensions)**
+- **Store Last Accessed Index to avoid redundant scanning**
+
+  
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
