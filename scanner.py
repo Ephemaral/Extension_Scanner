@@ -82,17 +82,17 @@ failed_indexes = []
 
 def file_prep(file_path):
     df = pd.read_excel(file_path)
-    column_name = 'Google Chrome Extensions ID'
-    skip = ['Temp', 'ghbmnnjooekpmoecnnnilnnbdlolhkhi', 'nmmhkkegccagdldgiimedpiccmgmieda', 'callobklhcbilhphinckomhgkigmfocg']
+    column_name = df.columns[0]
+    '''skip = ['Temp', 'ghbmnnjooekpmoecnnnilnnbdlolhkhi', 'nmmhkkegccagdldgiimedpiccmgmieda', 'callobklhcbilhphinckomhgkigmfocg']
     for string in skip:
-        df[column_name] = df[column_name].str.replace(string, ' ').str.replace(',', '')
+        df[column_name] = df[column_name].str.replace(string, ' ').str.replace(',', '')'''
     df[column_name] = df[column_name].str.strip().str.split()
-    df = df.dropna(subset=['Google Chrome Extensions ID'])
-    df = df[['Google Chrome Extensions ID']]
-    df = df[df['Google Chrome Extensions ID'].map(len) > 0]
-    df['Google Chrome Extensions ID'] = df['Google Chrome Extensions ID'].apply(lambda x: ', '.join(x) if isinstance(x, list) else x).str.replace(' ', '')
+    df = df.dropna(subset=[column_name])
+    df = df[[column_name]]
+    df = df[df[column_name].map(len) > 0]
+    df[column_name] = df[column_name].apply(lambda x: ', '.join(x) if isinstance(x, list) else x).str.replace(' ', '')
 
-    string = ','.join(df['Google Chrome Extensions ID'])
+    string = ','.join(df[column_name])
     unique_string = ','.join(set(string.split(',')))
     split_strings = unique_string.split(',')
     lambda_file = pd.DataFrame(split_strings, columns=['extension_id'])
@@ -101,7 +101,7 @@ def file_prep(file_path):
 
 
 def fetch_permissions(extension_id, version):
-    if '@' in extension_id:
+    if '@' in extension_id or '{' in extension_id:
         url_permissions = f"https://api.crxcavator.io/v1/report/{extension_id}/{version}?platform=Firefox"
     else:
         url_permissions = f"https://api.crxcavator.io/v1/report/{extension_id}/{version}"
@@ -144,7 +144,7 @@ def lambda_handler(file_path):
     for index, row in lambda_file.iterrows():
         try:
             extension_id = row['extension_id']
-            if '@' in extension_id:
+            if '@' in extension_id or '{' in extension_id:
                 url_submit = "https://api.crxcavator.io/v1/submit?platform=Firefox"
             else:
                 url_submit = "https://api.crxcavator.io/v1/submit"
@@ -178,7 +178,7 @@ def lambda_handler(file_path):
 
             safety_status = "Safe" if permission_value <= 50 else "Unsafe"
 
-            if '@' in extension_id:
+            if '@' in extension_id or '{' in extension_id:
                 url_metadata = f"https://api.crxcavator.io/v1/metadata/{extension_id}?platform=Firefox"
             else:
                 url_metadata = f"https://api.crxcavator.io/v1/metadata/{extension_id}"
@@ -210,8 +210,8 @@ def lambda_handler(file_path):
             pass
         
         except Exception as e:
-            print(f"Error processing extension ID {row['extension_id']}: {e}")
-            failed_extension_ids.append(row['extension_id'])
+            failed_extension_id = row['extension_id']
+            failed_extension_ids.append(failed_extension_id)
         continue
         
 
