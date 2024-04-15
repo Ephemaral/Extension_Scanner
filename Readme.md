@@ -16,6 +16,12 @@ python3 compare.py `<file_name_old.xlsx>` `<file_name_new.xlsx>`
 
 To utilize `compare.py`, all prerequisites are the same as those already mentioned below. This includes having Python installed, cloning the repository, and running the script with the specified paths to the two Excel files as arguments. This tool plays a vital role in ensuring a secure environment by continuously monitoring and addressing extension vulnerabilities.
 
+# Locating Extension IDs
+
+**Chrome:** To find the ID of a Chrome Extension, go to the extension's page on the Chrome Web Store and take note of the last segment of the URL. For example, in the URL https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd, the ID is `hdokiejnpimakedhajhdlcegeplioahd.`
+
+**Firefox:** The ID of a specific extension can be found in its `manifest.json` file. This file contains various metadata about the extension, including its unique ID.
+
 ## Credits
 
 Credit for the API and platform belongs to CRXcavator by DUO Security (https://crxcavator.io/). This script automates interactions with their API.
